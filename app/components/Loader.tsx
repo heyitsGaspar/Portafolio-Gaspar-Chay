@@ -44,14 +44,14 @@ export default function Loader() {
                         {n}%
                     </div>
 
-                    <div className="mt-6 h-1 w-64 overflow-hidden rounded-full bg-white/10">
+                    <div className="mt-6 h-1 w-64 overflow-hidden rounded-full bg-fg/10">
                         <motion.div
                             className="h-full bg-linear-to-r from-sky to-sun"
                             style={{ width: `${n}%` }}
                         />
                     </div>
 
-                    <p className="mt-4 text-sm tracking-[0.3em] text-white/50 uppercase">
+                    <p className="mt-4 text-sm tracking-[0.3em] text-fg/50 uppercase">
                         Cargando
                         <motion.span
                             animate={{ opacity: [0, 1, 0] }}

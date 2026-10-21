@@ -1,49 +1,34 @@
 "use client";
-import { useRef } from "react";
 import { motion } from "framer-motion";
 import Reveal, { SectionTitle } from "./Reveal";
-import { skillGroups, type Skill } from "@/app/lib/data";
-
-function SkillCard({ s }: { s: Skill }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const Icon = s.icon;
-
-  const onMove = (e: React.MouseEvent) => {
-    const r = ref.current!.getBoundingClientRect();
-    ref.current!.style.setProperty("--x", `${e.clientX - r.left}px`);
-    ref.current!.style.setProperty("--y", `${e.clientY - r.top}px`);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      data-hover
-      onMouseMove={onMove}
-      whileHover={{ y: -8, scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 300, damping: 18 }}
-      style={{ "--c": s.color } as React.CSSProperties}
-      className="group relative flex flex-col items-center gap-3 overflow-hidden rounded-2xl border border-white/10 bg-panel px-4 py-6 hover:border-[var(--c)]/60"
-    >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background: `radial-gradient(160px circle at var(--x) var(--y), ${s.color}30, transparent 70%)` }}
-      />
-      <Icon className="relative text-4xl text-white/40 transition duration-300 group-hover:scale-125 group-hover:text-[var(--c)]" />
-      <span className="relative text-sm text-white/70 transition group-hover:text-white">{s.name}</span>
-    </motion.div>
-  );
-}
+import { skillGroups } from "@/app/lib/data";
+import { useApp } from "./Providers";
 
 export default function Skills() {
+  const { t } = useApp();
   return (
     <section id="skills" className="mx-auto max-w-6xl px-6 py-28">
-      <SectionTitle kicker="Tecnologías" title="Mi caja de herramientas" />
-      <div className="space-y-12">
+      <SectionTitle kicker={t.skills.kicker} title={t.skills.title} />
+      <div className="grid gap-6 md:grid-cols-2">
         {skillGroups.map((g, gi) => (
-          <Reveal key={g.title} delay={gi * 0.05}>
-            <h3 className="mb-5 font-display text-lg text-sky">{g.title}</h3>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
-              {g.items.map((s) => <SkillCard key={s.name} s={s} />)}
+          <Reveal key={g.title} delay={gi * 0.08}>
+            <div className="h-full rounded-2xl border border-fg/10 bg-panel p-6">
+              <h3 className="mb-5 font-display text-sm tracking-widest text-sky uppercase">{g.title}</h3>
+              <div className="flex flex-wrap gap-2.5">
+                {g.items.map((s) => {
+                  const Icon = s.icon;
+                  return (
+                    <motion.span
+                      key={s.name} data-hover whileHover={{ y: -3 }}
+                      style={{ "--c": s.color } as React.CSSProperties}
+                      className="group flex items-center gap-2 rounded-full border border-fg/10 px-3.5 py-2 text-sm text-fg/70 transition hover:border-[var(--c)] hover:bg-[color-mix(in_srgb,var(--c)_12%,transparent)] hover:text-fg"
+                    >
+                      <Icon className="text-base text-fg/40 transition group-hover:text-[var(--c)]" />
+                      {s.name}
+                    </motion.span>
+                  );
+                })}
+              </div>
             </div>
           </Reveal>
         ))}

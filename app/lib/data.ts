@@ -26,7 +26,7 @@ export const skillGroups: { title: string; items: Skill[] }[] = [
         title: "Frontend",
         items: [
             { name: "React", icon: SiReact, color: "#61DAFB" },
-            { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
+            { name: "Next.js", icon: SiNextdotjs, color: "var(--fg)" },
             { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
             { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             { name: "Tailwind", icon: SiTailwindcss, color: "#38BDF8" },
@@ -37,7 +37,7 @@ export const skillGroups: { title: string; items: Skill[] }[] = [
         title: "Backend",
         items: [
             { name: "Node.js", icon: SiNodedotjs, color: "#5FA04E" },
-            { name: "Express", icon: SiExpress, color: "#FFFFFF" },
+            { name: "Express", icon: SiExpress, color: "var(--fg)" },
             { name: "FastAPI", icon: SiFastapi, color: "#009688" },
             { name: "Spring Boot", icon: SiSpringboot, color: "#6DB33F" },
             { name: "Python", icon: SiPython, color: "#FFD43B" },
@@ -60,7 +60,7 @@ export const skillGroups: { title: string; items: Skill[] }[] = [
             { name: "Flutter", icon: SiFlutter, color: "#54C5F8" },
             { name: "Docker", icon: SiDocker, color: "#2496ED" },
             { name: "Git", icon: SiGit, color: "#F05032" },
-            { name: "Vercel", icon: SiVercel, color: "#FFFFFF" },
+            { name: "Vercel", icon: SiVercel, color: "var(--fg)" },
             { name: "Postman", icon: SiPostman, color: "#FF6C37" },
             { name: "Figma", icon: SiFigma, color: "#F24E1E" },
         ],

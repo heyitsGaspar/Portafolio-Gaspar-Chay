@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { SectionTitle } from "./Reveal";
 import { experience, education } from "@/app/lib/data";
+import { useApp } from "./Providers";
 
 type TimelineItem = {
   period: string;
@@ -27,7 +28,7 @@ function Timeline({
 
   return (
     <div ref={ref} className="relative pl-10">
-      <div className="absolute top-0 left-[11px] h-full w-px bg-white/10" />
+      <div className="absolute top-0 left-[11px] h-full w-px bg-fg/10" />
       <motion.div
         style={{ scaleY }}
         className="absolute top-0 left-[11px] h-full w-px origin-top bg-linear-to-b from-sky via-iris to-sun"
@@ -45,10 +46,10 @@ function Timeline({
           <span className={`absolute top-2 -left-10 h-6 w-6 rounded-full border-4 border-ink ${dotClass}`} />
           <p className="mb-1 font-display text-sm text-sky">{e.period}</p>
           <h3 className="font-display text-2xl font-semibold">{e.title}</h3>
-          <p className="mb-4 text-white/50">{e.place}</p>
+          <p className="mb-4 text-fg/50">{e.place}</p>
 
           {e.points && (
-            <ul className="space-y-2 text-white/70">
+            <ul className="space-y-2 text-fg/70">
               {e.points.map((p) => (
                 <li key={p} className="flex gap-3">
                   <span className={bulletClass}>▹</span>
@@ -60,12 +61,12 @@ function Timeline({
 
           {e.tech && (
             <div className="mt-4 flex flex-wrap gap-2">
-              {e.tech.map((t) => (
+              {e.tech.map((tech) => (
                 <span
-                  key={t}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/60"
+                  key={tech}
+                  className="rounded-full border border-fg/10 bg-fg/5 px-3 py-1 text-xs text-fg/60"
                 >
-                  {t}
+                  {tech}
                 </span>
               ))}
             </div>
@@ -77,6 +78,8 @@ function Timeline({
 }
 
 export default function Experience() {
+  const { t } = useApp(); // ✅ dentro del componente
+
   // Normalizamos los datos para que ambos usen la misma forma (title)
   const work: TimelineItem[] = experience.map((e) => ({
     period: e.period,
@@ -94,18 +97,18 @@ export default function Experience() {
 
   return (
     <section id="experience" className="mx-auto max-w-4xl px-6 py-28">
-      <SectionTitle kicker="Experiencia" title="Mi trayectoria" />
+      <SectionTitle kicker={t.exp.kicker} title={t.exp.title} />
       <Timeline
         items={work}
-        dotClass="bg-sun shadow-[0_0_20px_#facc15]"
+        dotClass="bg-sun shadow-[0_0_20px_var(--sun)]"
         bulletClass="text-sun"
       />
 
       <div className="mt-28">
-        <SectionTitle kicker="Formación" title="Mi educación" />
+        <SectionTitle kicker={t.exp.eduKicker} title={t.exp.eduTitle} />
         <Timeline
           items={studies}
-          dotClass="bg-sky shadow-[0_0_20px_#38bdf8]"
+          dotClass="bg-sky shadow-[0_0_20px_var(--sky)]"
           bulletClass="text-sky"
         />
       </div>
