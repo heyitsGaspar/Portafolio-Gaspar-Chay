@@ -78,20 +78,20 @@ function Timeline({
 }
 
 export default function Experience() {
-  const { t } = useApp(); // ✅ dentro del componente
+  const { t, lang } = useApp();
 
   // Normalizamos los datos para que ambos usen la misma forma (title)
   const work: TimelineItem[] = experience.map((e) => ({
     period: e.period,
-    title: e.role,
+    title: e.role[lang],
     place: e.place,
-    points: e.points,
+    points: e.points[lang],
     tech: e.tech,
   }));
 
   const studies: TimelineItem[] = education.map((e) => ({
     period: e.period,
-    title: e.degree,
+    title: e.degree[lang],
     place: e.place,
   }));
 

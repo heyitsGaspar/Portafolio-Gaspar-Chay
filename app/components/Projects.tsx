@@ -7,7 +7,7 @@ import { projects } from "@/app/lib/data";
 import { useApp } from "./Providers";
 
 export default function Projects() {
-  const { t } = useApp(); // ✅ dentro del componente
+  const { t, lang } = useApp()
 
   return (
     <section id="projects" className="mx-auto max-w-6xl px-6 py-28">
@@ -28,7 +28,7 @@ export default function Projects() {
                 <ArrowUpRight className="text-fg/30 transition group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-sun" />
               </div>
               <h3 className="mb-2 font-display text-xl font-semibold transition group-hover:text-sky">{p.title}</h3>
-              <p className="mb-6 flex-1 text-sm text-fg/60">{p.desc}</p>
+              <p className="mb-6 flex-1 text-sm text-fg/60">{p.desc[lang]}</p>
               <div className="flex flex-wrap gap-2">
                 {p.tags.map((tag) => (
                   <span key={tag} className="rounded-full bg-sky/10 px-3 py-1 text-xs text-sky">{tag}</span>
