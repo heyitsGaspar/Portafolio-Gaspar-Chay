@@ -20,7 +20,46 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: #e6ecff;
+}
+
+:root {
+  --color-ink: #060b1b;
+  --color-panel: #0d1430;
+  --color-sky: #38bdf8;
+  --color-sun: #facc15;
+  --color-iris: #818cf8;
+  --color-coral: #fb7185;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-space), system-ui, sans-serif;
+}
+
+::selection {
+  background: #facc15;
+  color: #060b1b;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #38bdf8, #818cf8 50%, #facc15);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* Oculta el cursor nativo solo en dispositivos con mouse */
+@media (pointer: fine) {
+  body,
+  a,
+  button {
+    cursor: none;
+  }
 }
