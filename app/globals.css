@@ -11,6 +11,32 @@
   --line: color-mix(in srgb, var(--fg) 8%, transparent);
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee var(--dur, 45s) linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
 /* ───────── Tema oscuro (clase .dark en <html>) ───────── */
 .dark {
   --ink: #08080d;
