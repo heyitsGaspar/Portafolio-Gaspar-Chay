@@ -7,11 +7,38 @@ const es = {
     projectsBtn: "Ver proyectos",
     cv: "Descargar CV",
     about: {
-        kicker: "Sobre mí", title: "Construyo de punta a punta",
+        kicker: "Sobre mí",
+        title: "Construyo de punta a punta",
+        bio: [
+            "Soy desarrollador full-stack Jr. de Yucatán. Me gusta construir productos completos, desde la base de datos hasta la pantalla que usa la persona.",
+            "Mi proyecto más reciente, Teacher Tracker, ayuda a docentes a registrar entregas escaneando el QR de cada alumno.",
+        ],
+        facts: {
+            location: "Yucatán, México",
+            education: "Ing. en Desarrollo y Gestión de Software",
+            english: "Inglés B2",
+        },
+        stats: {
+            projects: "Proyectos en GitHub",
+            experience: "Experiencias profesionales",
+            backends: "Backends: Node.js y Java",
+        },
         items: [
-            { title: "Código limpio", text: "Mantenible, tipado y fácil de escalar." },
-            { title: "Alto rendimiento", text: "Sitios veloces y optimizados." },
-            { title: "Siempre aprendiendo", text: "Cloud, microservicios, DevOps y arquitectura." },
+            {
+                title: "Frontend con criterio",
+                text: "Interfaces responsivas y accesibles. Cuido los estados de carga, los errores y cómo se ve en el celular.",
+                tags: ["Next.js", "TypeScript", "Tailwind", "Shadcn/UI"],
+            },
+            {
+                title: "Backend seguro",
+                text: "APIs con sesiones en cookies HttpOnly, refresh tokens con rotación y datos aislados por usuario.",
+                tags: ["Spring Boot", "JWT", "PostgreSQL", "Node.js"],
+            },
+            {
+                title: "Calidad y despliegue",
+                text: "Pruebas de servicios, control de versiones y ahora llevando mis proyectos a Docker y CI/CD.",
+                tags: ["JUnit", "Mockito", "Git", "Docker"],
+            },
         ],
     },
     skills: { kicker: "Tecnologías", title: "Mi caja de herramientas" },
@@ -30,11 +57,38 @@ const en: typeof es = {
     projectsBtn: "View projects",
     cv: "Download CV",
     about: {
-        kicker: "About", title: "I build end to end",
+        kicker: "About me",
+        title: "I build end to end",
+        bio: [
+            "I'm a junior full-stack developer from Yucatán. I like building complete products, from the database to the screen people actually use.",
+            "My latest project, Teacher Tracker, helps teachers record submissions by scanning each student's QR code.",
+        ],
+        facts: {
+            location: "Yucatán, Mexico",
+            education: "B.Eng. in Software Development & Management",
+            english: "English B2",
+        },
+        stats: {
+            projects: "Projects on GitHub",
+            experience: "Work experiences",
+            backends: "Backends: Node.js & Java",
+        },
         items: [
-            { title: "Clean code", text: "Maintainable, typed and easy to scale." },
-            { title: "High performance", text: "Fast, optimized websites." },
-            { title: "Always learning", text: "Cloud, microservices, DevOps and architecture." },
+            {
+                title: "Frontend with care",
+                text: "Responsive, accessible interfaces. I pay attention to loading states, errors and how it looks on mobile.",
+                tags: ["Next.js", "TypeScript", "Tailwind", "Shadcn/UI"],
+            },
+            {
+                title: "Secure backend",
+                text: "APIs with HttpOnly cookie sessions, rotating refresh tokens and per-user data isolation.",
+                tags: ["Spring Boot", "JWT", "PostgreSQL", "Node.js"],
+            },
+            {
+                title: "Quality & delivery",
+                text: "Service tests, version control, and now taking my projects to Docker and CI/CD.",
+                tags: ["JUnit", "Mockito", "Git", "Docker"],
+            },
         ],
     },
     skills: { kicker: "Tech", title: "My toolbox" },
