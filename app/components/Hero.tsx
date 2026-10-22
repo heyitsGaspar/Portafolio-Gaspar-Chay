@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import { profile } from "@/app/lib/data";
 import { useApp } from "./Providers";
+import CodeCard from "./CodeCard";
 
 const D = 2.1;
 const chips = [
@@ -70,18 +71,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: D + 0.3, duration: 0.8 }}
-          className="relative mx-auto h-72 w-72 md:h-96 md:w-96">
-          <div className="absolute -inset-1 animate-[spin-slow_8s_linear_infinite] rounded-full bg-[conic-gradient(from_0deg,var(--sky),var(--iris),var(--sun),var(--sky))] blur-sm" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={profile.avatar} alt={profile.name} className="relative h-full w-full rounded-full border-4 border-ink object-cover" />
-          {chips.map((c) => (
-            <motion.span key={c.label} animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3, delay: c.d }}
-              className={`absolute ${c.cls} rounded-full border border-fg/15 bg-panel/80 px-3 py-1.5 text-xs font-semibold text-fg shadow-lg backdrop-blur`}>
-              {c.label}
-            </motion.span>
-          ))}
-        </motion.div>
+        <CodeCard delay={D + 0.3} />
       </div>
     </section>
   );

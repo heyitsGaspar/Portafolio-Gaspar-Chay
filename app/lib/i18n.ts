@@ -3,7 +3,7 @@ const es = {
     available: "Disponible para trabajar",
     hello: "Hola, soy",
     roles: ["Full Stack Developer", "React & Next.js", "Node.js & PostgreSQL", "Apps móviles con Flutter"],
-    bio: "Creo aplicaciones web escalables y de alto rendimiento. Me gusta colaborar en equipo, escribir código limpio y mantenible, y seguir mejorando cada día.",
+    bio: "Desarrollador full-stack Jr. con experiencia en React, Next.js, TypeScript y Node.js/Express, además de backend en Java con Spring Boot. He construido y desplegado aplicaciones web completas con autenticación JWT, APIs RES y PostgreSQL. Trabajo con Git y metodologías ágiles (Scrum), y me gusta escribir código limpio, probado y fácil de mantener. Busco incorporarme a un equipo colaborativo donde aportar, aprender y seguir creciendo profesionalmente.",
     projectsBtn: "Ver proyectos",
     cv: "Descargar CV",
     about: {
@@ -26,7 +26,7 @@ const en: typeof es = {
     available: "Available for work",
     hello: "Hi, I'm",
     roles: ["Full Stack Developer", "React & Next.js", "Node.js & PostgreSQL", "Mobile apps with Flutter"],
-    bio: "I build scalable, high-performance web applications. I enjoy teamwork, writing clean maintainable code, and getting better every day.",
+    bio: "Junior full-stack developer with experience in React, Next.js, TypeScript and Node.js/Express, plus backend work in Java with Spring Boot. I've built and deployed complete web applications with JWT authentication, REST APIs and PostgreSQL. I work with Git and agile methodologies (Scrum), and I enjoy writing clean, tested and maintainable code. I'm looking to join a collaborative team where I can contribute, learn and keep growing professionally.",
     projectsBtn: "View projects",
     cv: "Download CV",
     about: {
