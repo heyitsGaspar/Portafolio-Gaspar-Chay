@@ -70,6 +70,24 @@ export const skillGroups: { title: L10n; items: Skill[] }[] = [
 
 //
 export const projects = [
+        {
+        title: "Teacher Tracker — Frontend",
+        desc: {
+            es: "Interfaz web para docentes: alumnos, materias y actividades, con una tabla de entregas que se actualiza al escanear el QR de cada alumno y reportes en Excel/PDF por materia.",
+            en: "Web interface for teachers: students, subjects and activities, with a submissions grid that updates when each student's QR code is scanned, plus Excel/PDF reports per subject.",
+        },
+        tags: ["Next.js", "TypeScript", "Tailwind", "Shadcn/UI", "Axios"],
+        repo: "https://github.com/heyitsGaspar/FrontEnd_Teacher_Activities",
+    },
+    {
+        title: "Teacher Tracker — API",
+        desc: {
+            es: "API REST con Spring Boot, JWT en cookies HttpOnly y PostgreSQL. Aislamiento de datos por docente, refresh tokens con rotación, límite de intentos de login y pruebas con JUnit y Mockito.",
+            en: "REST API with Spring Boot, JWT in HttpOnly cookies and PostgreSQL. Per-teacher data isolation, rotating refresh tokens, login rate limiting and tests with JUnit and Mockito.",
+        },
+        tags: ["Java", "Spring Boot", "PostgreSQL", "JWT", "JUnit", "Docker", "Spring JPA"],
+        repo: "https://github.com/heyitsGaspar/Backend_Teacher_Activities",
+    },
     {
         title: "Landing Page Los Primos",
         desc: {
@@ -89,13 +107,13 @@ export const projects = [
         repo: "https://github.com/heyitsGaspar/api-prisma-typescript",
     },
     {
-        title: "Astro Landing The Cousins",
+        title: "Pokémon App",
         desc: {
-            es: "Sitio ultrarrápido construido con Astro, casi sin JavaScript en el cliente.",
-            en: "Ultra-fast site built with Astro, with almost no client-side JavaScript.",
+            es: "App que consume una API pública con búsqueda, detalle y diseño responsive.",
+            en: "App that consumes a public API with search, detail view and responsive design.",
         },
-        tags: ["Astro", "Tailwind"],
-        repo: "https://github.com/heyitsGaspar/astro-landing-theCousins",
+        tags: ["TypeScript", "React", "API"],
+        repo: "https://github.com/heyitsGaspar/pokemon_app",
     },
     {
         title: "Web PWA",
@@ -105,24 +123,6 @@ export const projects = [
         },
         tags: ["TypeScript", "PWA"],
         repo: "https://github.com/heyitsGaspar/web_pwa",
-    },
-    {
-        title: "API Express The Cousins",
-        desc: {
-            es: "Backend con Express y TypeScript: rutas, validaciones y autenticación.",
-            en: "Backend with Express and TypeScript: routes, validation and authentication.",
-        },
-        tags: ["Express", "TypeScript", "JWT"],
-        repo: "https://github.com/heyitsGaspar/api-express-typescript-the-cousins",
-    },
-    {
-        title: "Pokémon App",
-        desc: {
-            es: "App que consume una API pública con búsqueda, detalle y diseño responsive.",
-            en: "App that consumes a public API with search, detail view and responsive design.",
-        },
-        tags: ["TypeScript", "React", "API"],
-        repo: "https://github.com/heyitsGaspar/pokemon_app",
     },
 ];
 
