@@ -1,6 +1,19 @@
 "use client";
-import { useState, type CSSProperties, type MouseEvent } from "react";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import {
+  memo,
+  useCallback,
+  useRef,
+  useState,
+  type CSSProperties,
+  type MouseEvent,
+} from "react";
+import {
+  AnimatePresence,
+  LayoutGroup,
+  animate,
+  motion,
+  useMotionValue,
+} from "framer-motion";
 import Reveal, { SectionTitle } from "./Reveal";
 import { skillGroups } from "@/app/lib/data";
 import { useApp } from "./Providers";
@@ -14,7 +27,7 @@ const all: Item[] = skillGroups.flatMap((g, group) =>
   g.items.map((tech) => ({ ...tech, group }))
 );
 
-function Tile({
+const Tile = memo(function Tile({
   tech,
   index,
   onGlow,
@@ -24,6 +37,23 @@ function Tile({
   onGlow: (color: string | null) => void;
 }) {
   const Icon = tech.icon;
+
+  /* Giro de toda la card */
+  const rotateY = useMotionValue(0);
+  const spinning = useRef(false);
+
+  const spin = () => {
+    if (spinning.current) return;
+    spinning.current = true;
+    animate(rotateY, 360, {
+      duration: 0.7,
+      ease: [0.45, 0, 0.2, 1],
+      onComplete: () => {
+        rotateY.set(0); // 360° y 0° se ven igual
+        spinning.current = false;
+      },
+    });
+  };
 
   /* El punto de origen del relleno sigue al cursor */
   const move = (e: MouseEvent<HTMLLIElement>) => {
@@ -41,12 +71,20 @@ function Tile({
       exit={{ opacity: 0, scale: 0.85 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.35, delay: (index % 6) * 0.04 }}
-      whileHover="hover"
-      variants={{ hover: { y: -4 } }}
+      whileHover={{ y: -4 }}
       onMouseMove={move}
-      onMouseEnter={() => onGlow(tech.color)}
+      onMouseEnter={() => {
+        spin();
+        onGlow(tech.color);
+      }}
       onMouseLeave={() => onGlow(null)}
-      style={{ "--c": tech.color } as CSSProperties}
+      style={
+        {
+          "--c": tech.color,
+          rotateY,
+          transformPerspective: 900,
+        } as CSSProperties
+      }
       className="group relative flex flex-col items-center gap-2 overflow-hidden rounded-xl border border-fg/10 bg-panel px-2 py-4"
     >
       {/* Relleno de color que crece desde el cursor */}
@@ -56,34 +94,34 @@ function Tile({
         style={{ background: "color-mix(in srgb, var(--c) 90%, black)" }}
       />
 
-      {/* El ícono gira al pasar */}
-      <motion.span
-        className="relative"
-        variants={{ hover: { rotate: 360, scale: 1.15 } }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
-      >
-        <Icon className="text-2xl text-fg/45 transition-colors duration-300 group-hover:text-white" />
-      </motion.span>
+      <Icon className="relative text-2xl text-fg/45 transition duration-300 group-hover:scale-110 group-hover:text-white" />
 
       <span className="relative text-xs font-medium text-fg/70 transition-colors duration-300 group-hover:text-white">
         {tech.name}
       </span>
     </motion.li>
   );
-}
+});
 
 export default function Skills() {
   const { t, lang } = useApp();
   const [filter, setFilter] = useState<Filter>("all");
-  const [glow, setGlow] = useState<string | null>(null);
-  /* Guardamos el último color para que al salir solo se desvanezca,
-     sin cambiar de color de golpe */
-  const [lastGlow, setLastGlow] = useState("#38bdf8");
 
-  const handleGlow = (color: string | null) => {
-    if (color) setLastGlow(color);
-    setGlow(color);
-  };
+  /* Resplandor animado sin re-renders de React */
+  const glowColor = useMotionValue("#38bdf8");
+  const glowOpacity = useMotionValue(0);
+
+  const handleGlow = useCallback(
+    (color: string | null) => {
+      if (color) {
+        animate(glowColor, color, { duration: 0.6, ease: "easeInOut" });
+        animate(glowOpacity, 0.3, { duration: 0.4, ease: "easeOut" });
+      } else {
+        animate(glowOpacity, 0, { duration: 0.6, ease: "easeOut" });
+      }
+    },
+    [glowColor, glowOpacity]
+  );
 
   const visible = filter === "all" ? all : all.filter((tech) => tech.group === filter);
 
@@ -137,20 +175,13 @@ export default function Skills() {
 
         {/* Cuadrícula */}
         <div className="relative isolate">
-          {/* Resplandor: el color se interpola entre tiles */}
+          {/* Resplandor: sin blur, solo máscara radial */}
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute -inset-10 -z-10 blur-3xl"
-            initial={false}
-            animate={{
-              opacity: glow ? 0.28 : 0,
-              backgroundColor: lastGlow,
-            }}
-            transition={{
-              opacity: { duration: 0.5, ease: "easeOut" },
-              backgroundColor: { duration: 0.7, ease: "easeInOut" },
-            }}
+            className="pointer-events-none absolute -inset-8 -z-10 will-change-[opacity,background-color]"
             style={{
+              backgroundColor: glowColor,
+              opacity: glowOpacity,
               WebkitMaskImage: "radial-gradient(circle at center, black, transparent 70%)",
               maskImage: "radial-gradient(circle at center, black, transparent 70%)",
             }}
