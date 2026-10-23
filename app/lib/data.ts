@@ -68,9 +68,19 @@ export const skillGroups: { title: L10n; items: Skill[] }[] = [
     },
 ];
 
-//
-export const projects = [
-        {
+export type Project = {
+    title: string;
+    desc: { es: string; en: string };
+    tags: string[];
+    repo: string;
+    demo?: string; // Vercel / Render
+    docs?: string; // Swagger de la API
+    image?: string; // captura 16:9 en /public/projects/
+    status?: "live" | "wip" | "code";
+};
+
+export const projects: Project[] = [
+    {
         title: "Teacher Tracker — Frontend",
         desc: {
             es: "Interfaz web para docentes: alumnos, materias y actividades, con una tabla de entregas que se actualiza al escanear el QR de cada alumno y reportes en Excel/PDF por materia.",
@@ -78,6 +88,9 @@ export const projects = [
         },
         tags: ["Next.js", "TypeScript", "Tailwind", "Shadcn/UI", "Axios"],
         repo: "https://github.com/heyitsGaspar/FrontEnd_Teacher_Activities",
+        demo: "https://front-end-teacher-activities.vercel.app/login", // ← pon tu link real
+        image: "/assets/teacher-tracker-inicio.webp",
+        status: "live",
     },
     {
         title: "Teacher Tracker — API",
@@ -87,15 +100,21 @@ export const projects = [
         },
         tags: ["Java", "Spring Boot", "PostgreSQL", "JWT", "JUnit", "Docker", "Spring JPA"],
         repo: "https://github.com/heyitsGaspar/Backend_Teacher_Activities",
+        image: "/assets/teacher-tracker-api.webp",
+        // docs: "https://TU-API.onrender.com/swagger-ui/index.html", // ← si tienes Swagger
+        status: "live",
     },
     {
         title: "Landing Page Los Primos",
         desc: {
-            es: "Landing page moderna y responsive con TypeScript, pensada para un negocio real.",
-            en: "Modern, responsive landing page built with TypeScript, designed for a real business.",
+            es: "Landing page moderna y responsive para un negocio real de comida: hamburguesas, hot dogs, esquites y postres. Incluye un hero con fondo desenfocado, una sección de menú con tarjetas de fotos apiladas, un carrusel de productos y navegación por secciones.",
+            en: "Modern, responsive landing page for a real food business: burgers, hot dogs, esquites and desserts. It features a hero with a blurred background, a menu section with stacked photo cards, a product carousel and section-based navigation.",
         },
         tags: ["TypeScript", "Next.js", "Tailwind"],
         repo: "https://github.com/heyitsGaspar/LandingPage_Los_Primos",
+        demo: "https://landing-page-los-primos.vercel.app/", // ← pon tu link real
+        image: "/assets/los-primos.webp",
+        status: "live",
     },
     {
         title: "API Prisma + TypeScript",
@@ -105,6 +124,7 @@ export const projects = [
         },
         tags: ["TypeScript", "Prisma", "PostgreSQL"],
         repo: "https://github.com/heyitsGaspar/api-prisma-typescript",
+        status: "code",
     },
     {
         title: "Pokémon App",
@@ -113,7 +133,8 @@ export const projects = [
             en: "App that consumes a public API with search, detail view and responsive design.",
         },
         tags: ["TypeScript", "React", "API"],
-        repo: "https://github.com/heyitsGaspar/pokemon_app",
+        repo: "https://pokemon-app-murex-xi.vercel.app/",
+        status: "code",
     },
     {
         title: "Web PWA",
@@ -123,9 +144,26 @@ export const projects = [
         },
         tags: ["TypeScript", "PWA"],
         repo: "https://github.com/heyitsGaspar/web_pwa",
+        status: "code",
     },
 ];
 
+export const projectLabels = {
+    es: {
+        demo: "Ver demo",
+        docs: "Documentación API",
+        code: "Código",
+        docsHint: "Si la API estaba dormida, puede tardar en responder la primera vez",
+        status: { live: "En línea", wip: "En desarrollo", code: "Solo código" },
+    },
+    en: {
+        demo: "Live demo",
+        docs: "API docs",
+        code: "Code",
+        docsHint: "If the API was asleep, the first request may take a while",
+        status: { live: "Live", wip: "In progress", code: "Code only" },
+    },
+} as const;
 export const experience = [
     {
         period: "01/2025 — 04/2025",
