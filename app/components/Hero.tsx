@@ -16,6 +16,12 @@ import CodeCard from "./CodeCard";
 
 const D = 2.1;
 
+
+const cvFiles = {
+  es: "/CV-Gaspar-Chay-ES.pdf",
+  en: "/CV-Gaspar-Chay-EN.pdf",
+} as const;
+
 /* Color de cada letra a lo largo del degradado sky → iris → sun */
 const colorAt = (p: number) =>
   p < 0.5
@@ -139,7 +145,7 @@ function TiltFloat({ children, delay }: { children: ReactNode; delay: number }) 
 }
 
 export default function Hero() {
-  const { t } = useApp();
+  const { t, lang } = useApp();
   const [i, setI] = useState(0);
   const [ready, setReady] = useState(false);
 
@@ -179,7 +185,7 @@ export default function Hero() {
             className="mb-1 font-display text-base text-fg/60 md:text-lg">{t.hello}</motion.p>
 
           {/* El tamaño depende del ancho Y del alto de la ventana */}
-          <h1 className="font-display text-[length:clamp(3rem,min(8vw,13vh),6rem)] leading-[1.05] font-bold tracking-tight">
+          <h1 className="font-display text-[clamp(3rem,min(8vw,13vh),6rem)] leading-[1.05] font-bold tracking-tight">
             <AnimatedName text={profile.name} delay={D + 0.2} />
           </h1>
 
@@ -203,7 +209,11 @@ export default function Hero() {
             <a href="#projects" className="group flex items-center gap-2 rounded-full bg-sun px-7 py-3 font-semibold text-white transition hover:shadow-[0_0_40px_-5px_var(--sun)]">
               {t.projectsBtn} <ArrowRight className="transition group-hover:translate-x-1" size={18} />
             </a>
-            <a href="/cv.pdf" download className="flex items-center gap-2 rounded-full border border-sky/50 px-7 py-3 font-semibold text-sky transition hover:bg-sky/10">
+            <a
+              href={cvFiles[lang === "en" ? "en" : "es"]}
+              download
+              className="flex items-center gap-2 rounded-full border border-sky/50 px-7 py-3 font-semibold text-sky transition hover:bg-sky/10"
+            >
               <Download size={18} /> {t.cv}
             </a>
           </motion.div>
